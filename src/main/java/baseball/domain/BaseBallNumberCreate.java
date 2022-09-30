@@ -3,7 +3,7 @@ import camp.nextstep.edu.missionutils.Randoms;
 
 import java.util.*;
 
-public class BallNumberCreate {
+public class BaseBallNumberCreate {
     private static final int BALL_SIZE = 3;
     private static final int BALL_MIN_NUM = 1;
     private static final int BALL_MAX_NUM = 9;
