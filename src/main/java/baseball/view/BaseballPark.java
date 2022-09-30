@@ -1,24 +1,40 @@
-package baseball.domain;
+package baseball.view;
 
+import baseball.domain.BaseballResult;
 import camp.nextstep.edu.missionutils.Console;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
-public class Player {
-
+public class BaseballPark {
     private static final int INPUT_SIZE = 3;
-
+    
     public List<Integer> inputNumber() {
+        System.out.println("숫자를 입력해주세요: ");
         String input = Console.readLine();
 
         return createInputNumbers(input);
     }
 
-    private List<Integer> createInputNumbers(String input) {
+    public Boolean gameResult(BaseballResult result) {
+        String viewResult = "";
+        if (result.getStrike() == INPUT_SIZE) {
+            System.out.println("게임 종료!");
+            return true;
+        }
+        if (result.getBall() > 0) {
+            viewResult += result.getBall() + "볼 ";
+        }
+        if (result.getStrike() > 0) {
+            viewResult += result.getStrike() + "스트라이크";
+        }
+        if (viewResult.equals("")) {
+            viewResult += "낫싱";
+        }
+        System.out.println(viewResult);
+        return false;
+    }
 
-        Set<Integer> uniqueNumbers = new HashSet<>();
+    private List<Integer> createInputNumbers(String input) {
+        Set<Integer> uniqueNumbers = new LinkedHashSet<>();
 
         for (char charAsInteger : input.toCharArray()) {
             uniqueNumbers.add(StringToInteger(String.valueOf(charAsInteger)));
