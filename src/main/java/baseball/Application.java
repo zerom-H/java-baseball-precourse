@@ -1,35 +1,27 @@
 package baseball;
 
-import baseball.domain.BaseBallNumberCreate;
+import baseball.domain.BaseBallCreate;
 import baseball.domain.BaseballReferee;
 import baseball.domain.BaseballResult;
-import baseball.view.BaseballPark;
+import baseball.view.BaseballView;
 import camp.nextstep.edu.missionutils.Console;
 
 import java.util.List;
 
 public class Application {
     public static void main(String[] args) {
-        BaseBallNumberCreate ballNumberCreate = new BaseBallNumberCreate();
-        BaseballReferee baseballReferee = new BaseballReferee();
-        BaseballPark baseballPark = new BaseballPark();
-
         do {
-            playGame(baseballReferee, ballNumberCreate.createBaseballNumbers(), baseballPark);
+            BaseBallCreate ballNumberCreate = new BaseBallCreate();
+            playGame(ballNumberCreate.createBaseballNumbers());
         } while (playAgain());
     }
 
-    public static void playGame(BaseballReferee baseballReferee, List<Integer> baseballNumbers, BaseballPark baseballPark) {
-
-        for (Integer baseballNumber : baseballNumbers) {
-            System.out.println("baseballNumber = " + baseballNumber);
-        }
-
+    public static void playGame(List<Integer> baseballNumbers) {
         boolean result;
         do {
-            List<Integer> inputNumbers = baseballPark.inputNumber();
-            BaseballResult match = baseballReferee.match(inputNumbers, baseballNumbers);
-            result = baseballPark.gameResult(match);
+            List<Integer> inputNumbers = BaseballView.inputNumber();
+            BaseballResult match = BaseballReferee.match(inputNumbers, baseballNumbers);
+            result = BaseballView.gameResult(match);
         } while (!result);
     }
 
@@ -39,6 +31,9 @@ public class Application {
         if (inputAgain.equals("1")) {
             return true;
         }
-        return false;
+        if (inputAgain.equals("2")) {
+            return false;
+        }
+        throw new IllegalArgumentException();
     }
 }
