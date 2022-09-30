@@ -2,19 +2,23 @@ package baseball.view;
 
 import baseball.domain.BaseballResult;
 import camp.nextstep.edu.missionutils.Console;
-import java.util.*;
 
-public class BaseballPark {
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Set;
+
+public class BaseballView {
     private static final int INPUT_SIZE = 3;
-    
-    public List<Integer> inputNumber() {
+
+    public static List<Integer> inputNumber() {
         System.out.println("숫자를 입력해주세요: ");
         String input = Console.readLine();
 
         return createInputNumbers(input);
     }
 
-    public Boolean gameResult(BaseballResult result) {
+    public static Boolean gameResult(BaseballResult result) {
         String viewResult = "";
         if (result.getStrike() == INPUT_SIZE) {
             System.out.println("게임 종료!");
@@ -33,7 +37,7 @@ public class BaseballPark {
         return false;
     }
 
-    private List<Integer> createInputNumbers(String input) {
+    private static List<Integer> createInputNumbers(String input) {
         Set<Integer> uniqueNumbers = new LinkedHashSet<>();
 
         for (char charAsInteger : input.toCharArray()) {
@@ -46,7 +50,7 @@ public class BaseballPark {
         return new ArrayList<>(uniqueNumbers);
     }
 
-   private Integer StringToInteger(String input) {
+    private static Integer StringToInteger(String input) {
         try {
             return Integer.parseInt(input);
         } catch (Exception exception) {
@@ -54,13 +58,13 @@ public class BaseballPark {
         }
     }
 
-    private void validateSize(String input) {
+    private static void validateSize(String input) {
         if (input.length() != INPUT_SIZE) {
             throw new IllegalArgumentException(String.format("입력 숫자은 %s자리를 넘을 수 없습니다. ", INPUT_SIZE));
         }
     }
 
-    private void validateDuplicated(Set<Integer> uniqueNumbers) {
+    private static void validateDuplicated(Set<Integer> uniqueNumbers) {
         if (uniqueNumbers.size() != INPUT_SIZE) {
             throw new IllegalArgumentException("같은 숫자는 입력하실 수 없습니다.");
         }
