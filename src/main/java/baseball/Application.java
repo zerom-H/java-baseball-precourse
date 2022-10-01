@@ -1,26 +1,25 @@
 package baseball;
 
-import baseball.domain.BaseBallCreate;
-import baseball.domain.BaseballReferee;
+import baseball.domain.BallGenerator;
 import baseball.domain.BaseballResult;
+import baseball.domain.Player;
+import baseball.domain.Score;
 import baseball.view.BaseballView;
 import camp.nextstep.edu.missionutils.Console;
-
-import java.util.List;
 
 public class Application {
     public static void main(String[] args) {
         do {
-            BaseBallCreate ballNumberCreate = new BaseBallCreate();
-            playGame(ballNumberCreate.createBaseballNumbers());
+            BallGenerator generatedBall = new BallGenerator();
+            playGame(generatedBall);
         } while (playAgain());
     }
 
-    public static void playGame(List<Integer> baseballNumbers) {
+    public static void playGame(BallGenerator generatedBall) {
         boolean result;
         do {
-            List<Integer> inputNumbers = BaseballView.inputNumber();
-            BaseballResult match = BaseballReferee.match(inputNumbers, baseballNumbers);
+            Player player = BaseballView.inputNumber();
+            Score match = BaseballResult.match(player.getNumberList(), generatedBall.getNumberList());
             result = BaseballView.gameResult(match);
         } while (!result);
     }
