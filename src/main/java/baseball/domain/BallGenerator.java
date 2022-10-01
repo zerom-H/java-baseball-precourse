@@ -7,12 +7,13 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
-public class BaseBallCreate {
+public class BallGenerator {
     private static final int BALL_SIZE = 3;
     private static final int BALL_MIN_NUM = 1;
     private static final int BALL_MAX_NUM = 9;
+    private List<Integer> numberList;
 
-    public List<Integer> createBaseballNumbers() {
+    public BallGenerator() {
         Set<Integer> uniqueNumbers = new LinkedHashSet<>();
 
         while (uniqueNumbers.size() < BALL_SIZE) {
@@ -20,6 +21,10 @@ public class BaseBallCreate {
             uniqueNumbers.add(pickedNumber);
         }
 
-        return new ArrayList<>(uniqueNumbers);
+        this.numberList = new ArrayList<>(uniqueNumbers);
+    }
+
+    public List<Integer> getNumberList() {
+        return numberList;
     }
 }
