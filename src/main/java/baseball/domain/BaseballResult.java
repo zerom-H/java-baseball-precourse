@@ -1,19 +1,31 @@
 package baseball.domain;
 
+import java.util.List;
+
 public class BaseballResult {
-    private int strike;
-    private int ball;
 
-    public BaseballResult(int strike, int ball) {
-        this.strike = strike;
-        this.ball = ball;
+    public static Score match(List<Integer> inputNumbers, List<Integer> createdNumbers) {
+        int strike = 0;
+        int ball = 0;
+
+        for (int i = 0; i < inputNumbers.size(); i++) {
+            strike += checkStrike(inputNumbers, createdNumbers, i);
+            ball += checkBall(inputNumbers, createdNumbers, i);
+        }
+        return new Score(strike, ball);
     }
 
-    public int getStrike() {
-        return strike;
+    private static int checkStrike(List<Integer> inputNumbers, List<Integer> createdNumbers, int idx) {
+        if (createdNumbers.get(idx).equals(inputNumbers.get(idx))) {
+            return 1;
+        }
+        return 0;
     }
 
-    public int getBall() {
-        return ball;
+    private static int checkBall(List<Integer> inputNumbers, List<Integer> createdNumbers, int idx) {
+        if (createdNumbers.contains(inputNumbers.get(idx)) && !createdNumbers.get(idx).equals(inputNumbers.get(idx))) {
+            return 1;
+        }
+        return 0;
     }
 }
